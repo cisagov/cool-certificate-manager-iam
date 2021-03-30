@@ -4,9 +4,9 @@
 # You must provide a value for each of these parameters.
 # ------------------------------------------------------------------------------
 
-variable "subnet_id" {
-  type        = string
-  description = "The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0)"
+variable "users" {
+  type        = list(string)
+  description = "A list containing the usernames of each user that is allowed to manage certificates.  Example: [ \"firstname1.lastname1\", \"firstname2.lastname2\" ]"
 }
 
 # ------------------------------------------------------------------------------
@@ -14,22 +14,41 @@ variable "subnet_id" {
 #
 # These parameters have reasonable defaults.
 # ------------------------------------------------------------------------------
-variable "ami_owner_account_id" {
+
+variable "assume_dns_certificatesbucketfullaccess_policy_description" {
   type        = string
-  description = "The ID of the AWS account that owns the Example AMI, or \"self\" if the AMI is owned by the same account as the provisioner."
-  default     = "self"
+  description = "The description to associate with the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account."
+  default     = "The IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account."
 }
 
-variable "aws_availability_zone" {
+variable "assume_dns_certificatesbucketfullaccess_policy_name" {
   type        = string
-  description = "The AWS availability zone to deploy into (e.g. a, b, c, etc.)"
-  default     = "a"
+  description = "The name to assign the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account."
+  default     = "DNS-AssumeCertificatesBucketFullAccess"
+}
+
+variable "assume_dns_route53resourcechange_cyber_dhs_gov_policy_description" {
+  type        = string
+  description = "The description to associate with the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account."
+  default     = "The IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account."
+}
+
+variable "assume_dns_route53resourcechange_cyber_dhs_gov_policy_name" {
+  type        = string
+  description = "The name to assign the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account."
+  default     = "DNS-AssumeRoute53ResourceChange-cyber.dhs.gov"
 }
 
 variable "aws_region" {
   type        = string
   description = "The AWS region to deploy into (e.g. us-east-1)"
   default     = "us-east-1"
+}
+
+variable "certificate_managers_group_name" {
+  type        = string
+  description = "The name of the group to be created for certificate manager users."
+  default     = "certificate_managers"
 }
 
 variable "tags" {

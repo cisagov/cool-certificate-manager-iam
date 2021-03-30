@@ -2,38 +2,50 @@
 
 [![GitHub Build Status](https://github.com/cisagov/cool-certificate-manager-iam/workflows/build/badge.svg)](https://github.com/cisagov/cool-certificate-manager-iam/actions)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) [Terraform
-module](https://www.terraform.io/docs/modules/index.html) GitHub
-repository started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
+This project is used to manage IAM permissions for COOL users that are
+allowed to
+[create](https://github.com/cisagov/cool-system/wiki/Creating-a-COOL-Certificate)
+and
+[renew](https://github.com/cisagov/cool-system/wiki/Renewing-a-COOL-Certificate)
+COOL certificates.
 
-See [here](https://www.terraform.io/docs/modules/index.html) for more
-details on Terraform modules and the standard module structure.
+## Pre-requisites ##
+
+- [Terraform](https://www.terraform.io/) installed on your system.
+- An accessible AWS S3 bucket to store Terraform state
+  (specified in [backend.tf](backend.tf)).
+- An accessible AWS DynamoDB database to store the Terraform state lock
+  (specified in [backend.tf](backend.tf)).
+- Access to all of the Terraform remote states specified in
+  [remote_states.tf](remote_states.tf).
+- User accounts for all users must have been created previously.  We
+  recommend using the
+  [`cisagov/cool-users-non-admin`](https://github.com/cisagov/cool-users-non-admin)
+  repository to create users.
+- Terraform in
+  [`cisagov/cool-dns-certboto`](https://github.com/cisagov/cool-dns-certboto)
+  must have been applied.
+- Terraform in
+  [`cisagov/cool-dns-cyber.dhs.gov`](https://github.com/cisagov/cool-dns-cyber.dhs.gov)
+  must have been applied.
 
 ## Usage ##
 
-```hcl
-module "example" {
-  source = "github.com/cisagov/cool-certificate-manager-iam"
+1. Create a Terraform workspace (if you haven't already done so) by running
+   `terraform workspace new <workspace_name>`
+1. Create a `<workspace_name>.tfvars` file with all of the required
+  variables (see [Inputs](#Inputs) below for details):
 
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
+  ```hcl
+  users = [
+    "firstname1.lastname1",
+    "firstname2.lastname2"
+  ]
+  ```
 
-  tags = {
-    Key1 = "Value1"
-    Key2 = "Value2"
-  }
-}
-```
-
-## Examples ##
-
-* [Deploying into the default VPC](https://github.com/cisagov/cool-certificate-manager-iam/tree/develop/examples/default_vpc)
+1. Run the command `terraform init`.
+1. Run the command `terraform apply
+  -var-file=<workspace_name>.tfvars`.
 
 ## Requirements ##
 
@@ -47,39 +59,30 @@ module "example" {
 | Name | Version |
 |------|---------|
 | aws | ~> 3.0 |
+| aws.users | ~> 3.0 |
+| terraform | n/a |
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| ami_owner_account_id | The ID of the AWS account that owns the Example AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `self` | no |
-| aws_availability_zone | The AWS availability zone to deploy into (e.g. a, b, c, etc.) | `string` | `a` | no |
+| assume_dns_certificatesbucketfullaccess_policy_description | The description to associate with the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account. | `string` | `The IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account.` | no |
+| assume_dns_certificatesbucketfullaccess_policy_name | The name to assign the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account. | `string` | `DNS-AssumeCertificatesBucketFullAccess` | no |
+| assume_dns_route53resourcechange_cyber_dhs_gov_policy_description | The description to associate with the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account. | `string` | `The IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account.` | no |
+| assume_dns_route53resourcechange_cyber_dhs_gov_policy_name | The name to assign the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account. | `string` | `DNS-AssumeRoute53ResourceChange-cyber.dhs.gov` | no |
 | aws_region | The AWS region to deploy into (e.g. us-east-1) | `string` | `us-east-1` | no |
-| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `string` | n/a | yes |
+| certificate_managers_group_name | The name of the group to be created for certificate manager users. | `string` | `certificate_managers` | no |
 | tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
+| users | A list containing the usernames of each user that is allowed to manage certificates.  Example: [ "firstname1.lastname1", "firstname2.lastname2" ] | `list(string)` | n/a | yes |
 
 ## Outputs ##
 
-| Name | Description |
-|------|-------------|
-| arn | The EC2 instance ARN |
-| availability_zone | The AZ where the EC2 instance is deployed |
-| id | The EC2 instance ID |
-| private_ip | The private IP of the EC2 instance |
-| subnet_id | The ID of the subnet where the EC2 instance is deployed |
+No output.
 
 ## Notes ##
 
 Running `pre-commit` requires running `terraform init` in every directory that
-contains Terraform code. In this repository, these are the main directory and
-every directory under `examples/`.
-
-## New Repositories from a Skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
+contains Terraform code. In this repository, this is just the main directory.
 
 ## Contributing ##
 
