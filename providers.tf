@@ -3,7 +3,7 @@
 # the other providers.
 
 provider "aws" {
-  default-tags {
+  default_tags {
     tags = var.tags
   }
   region = var.aws_region
@@ -16,7 +16,7 @@ provider "aws" {
     role_arn     = data.terraform_remote_state.users.outputs.provisionaccount_role.arn
     session_name = local.caller_user_name
   }
-  default-tags {
+  default_tags {
     tags = var.tags
   }
   region = var.aws_region
