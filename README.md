@@ -52,32 +52,54 @@ COOL certificates.
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.12.0 |
-| aws | ~> 3.0 |
+| aws | ~> 3.38 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.0 |
-| aws.users | ~> 3.0 |
+| aws | ~> 3.38 |
+| aws.users | ~> 3.38 |
 | terraform | n/a |
+
+## Modules ##
+
+No modules.
+
+## Resources ##
+
+| Name | Type |
+|------|------|
+| [aws_iam_group.certificate_managers](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
+| [aws_iam_group_policy_attachment.assume_dns_certificatesbucketfullaccess_role_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
+| [aws_iam_group_policy_attachment.assume_dns_route53resourcechange_cyber_dhs_gov_role_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
+| [aws_iam_policy.assume_dns_certificatesbucketfullaccess_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy.assume_dns_route53resourcechange_cyber_dhs_gov_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_user_group_membership.certificate_managers](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.assume_dns_certificatesbucketfullaccess_role_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.assume_dns_route53resourcechange_cyber_dhs_gov_role_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_user.users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_user) | data source |
+| [terraform_remote_state.dns_certboto](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.dns_cyber_dhs_gov](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.users](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| assume_dns_certificatesbucketfullaccess_policy_description | The description to associate with the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account. | `string` | `The IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account.` | no |
-| assume_dns_certificatesbucketfullaccess_policy_name | The name to assign the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account. | `string` | `DNS-AssumeCertificatesBucketFullAccess` | no |
-| assume_dns_route53resourcechange_cyber_dhs_gov_policy_description | The description to associate with the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account. | `string` | `The IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account.` | no |
-| assume_dns_route53resourcechange_cyber_dhs_gov_policy_name | The name to assign the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account. | `string` | `DNS-AssumeRoute53ResourceChange-cyber.dhs.gov` | no |
-| aws_region | The AWS region to deploy into (e.g. us-east-1) | `string` | `us-east-1` | no |
-| certificate_managers_group_name | The name of the group to be created for certificate manager users. | `string` | `certificate_managers` | no |
-| tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
-| users | A list containing the usernames of each user that is allowed to manage certificates.  Example: [ "firstname1.lastname1", "firstname2.lastname2" ] | `list(string)` | n/a | yes |
+| assume\_dns\_certificatesbucketfullaccess\_policy\_description | The description to associate with the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account. | `string` | `"The IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account."` | no |
+| assume\_dns\_certificatesbucketfullaccess\_policy\_name | The name to assign the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account. | `string` | `"DNS-AssumeCertificatesBucketFullAccess"` | no |
+| assume\_dns\_route53resourcechange\_cyber\_dhs\_gov\_policy\_description | The description to associate with the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account. | `string` | `"The IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account."` | no |
+| assume\_dns\_route53resourcechange\_cyber\_dhs\_gov\_policy\_name | The name to assign the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account. | `string` | `"DNS-AssumeRoute53ResourceChange-cyber.dhs.gov"` | no |
+| aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
+| certificate\_managers\_group\_name | The name of the group to be created for certificate manager users. | `string` | `"certificate_managers"` | no |
+| tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
+| users | A list containing the usernames of each user that is allowed to manage certificates.  Example: [ "firstname1.lastname1", "firstname2.lastname2" ]. | `list(string)` | n/a | yes |
 
 ## Outputs ##
 
-No output.
+No outputs.
 
 ## Notes ##
 
