@@ -92,10 +92,10 @@ No modules.
 | assume\_dns\_certificatesbucketfullaccess\_policy\_name | The name to assign the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account. | `string` | `"DNS-AssumeCertificatesBucketFullAccess"` | no |
 | assume\_dns\_route53resourcechange\_cyber\_dhs\_gov\_policy\_description | The description to associate with the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account. | `string` | `"The IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account."` | no |
 | assume\_dns\_route53resourcechange\_cyber\_dhs\_gov\_policy\_name | The name to assign the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account. | `string` | `"DNS-AssumeRoute53ResourceChange-cyber.dhs.gov"` | no |
-| aws\_region | The AWS region to deploy into (e.g. us-east-1) | `string` | `"us-east-1"` | no |
+| aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
 | certificate\_managers\_group\_name | The name of the group to be created for certificate manager users. | `string` | `"certificate_managers"` | no |
-| tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
-| users | A list containing the usernames of each user that is allowed to manage certificates.  Example: [ "firstname1.lastname1", "firstname2.lastname2" ] | `list(string)` | n/a | yes |
+| tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
+| users | A list containing the usernames of each user that is allowed to manage certificates.  Example: [ "firstname1.lastname1", "firstname2.lastname2" ]. | `list(string)` | n/a | yes |
 
 ## Outputs ##
 

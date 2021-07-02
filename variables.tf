@@ -6,7 +6,7 @@
 
 variable "users" {
   type        = list(string)
-  description = "A list containing the usernames of each user that is allowed to manage certificates.  Example: [ \"firstname1.lastname1\", \"firstname2.lastname2\" ]"
+  description = "A list containing the usernames of each user that is allowed to manage certificates.  Example: [ \"firstname1.lastname1\", \"firstname2.lastname2\" ]."
 }
 
 # ------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ variable "assume_dns_route53resourcechange_cyber_dhs_gov_policy_name" {
 
 variable "aws_region" {
   type        = string
-  description = "The AWS region to deploy into (e.g. us-east-1)"
+  description = "The AWS region to deploy into (e.g. us-east-1)."
   default     = "us-east-1"
 }
 
@@ -53,6 +53,6 @@ variable "certificate_managers_group_name" {
 
 variable "tags" {
   type        = map(string)
-  description = "Tags to apply to all AWS resources created"
+  description = "Tags to apply to all AWS resources created."
   default     = {}
 }
