@@ -40,9 +40,9 @@ variable "assume_dns_route53resourcechange_cyber_dhs_gov_policy_name" {
 }
 
 variable "aws_region" {
-  type        = string
-  description = "The AWS region to deploy into (e.g. us-east-1)."
   default     = "us-east-1"
+  description = "The AWS region to deploy into (e.g. us-east-1)."
+  type        = string
 }
 
 variable "certificate_managers_group_name" {
