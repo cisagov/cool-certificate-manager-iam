@@ -4,9 +4,8 @@ resource "aws_iam_user_group_membership" "certificate_managers" {
 
   for_each = toset(var.users)
 
-  user = data.aws_iam_user.users[each.key].user_name
-
   groups = [
     aws_iam_group.certificate_managers.name
   ]
+  user = data.aws_iam_user.users[each.key].user_name
 }
