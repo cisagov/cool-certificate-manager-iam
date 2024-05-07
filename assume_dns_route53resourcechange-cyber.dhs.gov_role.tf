@@ -2,9 +2,9 @@
 # Route53ResourceChange-cyber.dhs.gov role in the DNS account
 data "aws_iam_policy_document" "assume_dns_route53resourcechange_cyber_dhs_gov_role_doc" {
   statement {
-    effect = "Allow"
-
     actions = ["sts:AssumeRole"]
+
+    effect = "Allow"
 
     resources = [
       data.terraform_remote_state.dns_cyber_dhs_gov.outputs.route53resourcechange_role.arn,

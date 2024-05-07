@@ -2,9 +2,9 @@
 # CertificatesBucketFullAccess role in the DNS account
 data "aws_iam_policy_document" "assume_dns_certificatesbucketfullaccess_role_doc" {
   statement {
-    effect = "Allow"
-
     actions = ["sts:AssumeRole"]
+
+    effect = "Allow"
 
     resources = [
       data.terraform_remote_state.dns_certboto.outputs.certificatesbucketfullaccess_role.arn,
