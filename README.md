@@ -96,6 +96,7 @@ No modules.
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
 | certificate\_managers\_group\_name | The name of the group to be created for certificate manager users. | `string` | `"certificate_managers"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
+| terraform\_state\_bucket | The name of the S3 bucket where Terraform state is stored. | `string` | n/a | yes |
 | users | A list containing the usernames of each user that is allowed to manage certificates.  Example: [ "firstname1.lastname1", "firstname2.lastname2" ]. | `list(string)` | n/a | yes |
 
 ## Outputs ##
