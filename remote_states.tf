@@ -8,27 +8,29 @@ data "terraform_remote_state" "dns_certboto" {
   backend = "s3"
 
   config = {
-    encrypt        = true
-    bucket         = "cisa-cool-terraform-state"
+    bucket         = var.terraform_state_bucket
     dynamodb_table = "terraform-state-lock"
+    encrypt        = true
+    key            = "cool-dns-certboto/terraform.tfstate"
     profile        = "cool-terraform-backend"
     region         = "us-east-1"
-    key            = "cool-dns-certboto/terraform.tfstate"
   }
 
-  workspace = "production"
+  workspace = terraform.workspace
 }
 
 data "terraform_remote_state" "dns_cyber_dhs_gov" {
   backend = "s3"
 
   config = {
-    encrypt        = true
+    # There is only one currently-supported bucket and workspace for this remote
+    # state (Production), so we must use them.
     bucket         = "cisa-cool-terraform-state"
     dynamodb_table = "terraform-state-lock"
-    profile        = "cool-terraform-backend"
-    region         = "us-east-1"
+    encrypt        = true
     key            = "cool-dns-cyber.dhs.gov.tfstate"
+    profile        = "cool-terraform-readcyberdhsgovterraformstate-production"
+    region         = "us-east-1"
   }
 
   workspace = "production"
@@ -38,13 +40,13 @@ data "terraform_remote_state" "users" {
   backend = "s3"
 
   config = {
-    encrypt        = true
-    bucket         = "cisa-cool-terraform-state"
+    bucket         = var.terraform_state_bucket
     dynamodb_table = "terraform-state-lock"
+    encrypt        = true
+    key            = "cool-accounts/users.tfstate"
     profile        = "cool-terraform-backend"
     region         = "us-east-1"
-    key            = "cool-accounts/users.tfstate"
   }
 
-  workspace = "production"
+  workspace = terraform.workspace
 }
