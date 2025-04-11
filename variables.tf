@@ -4,6 +4,12 @@
 # You must provide a value for each of these parameters.
 # ------------------------------------------------------------------------------
 
+variable "terraform_state_bucket" {
+  description = "The name of the S3 bucket where Terraform state is stored."
+  nullable    = false
+  type        = string
+}
+
 variable "users" {
   description = "A list containing the usernames of each user that is allowed to manage certificates.  Example: [ \"firstname1.lastname1\", \"firstname2.lastname2\" ]."
   nullable    = false
