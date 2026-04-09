@@ -53,14 +53,14 @@ COOL certificates.
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | ~> 1.1 |
 | aws | ~> 6.7 |
 
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | aws | ~> 6.7 |
 | aws.users | ~> 6.7 |
 | terraform | n/a |
@@ -72,7 +72,7 @@ No modules.
 ## Resources ##
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_group.certificate_managers](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
 | [aws_iam_group_policy_attachment.assume_dns_certificatesbucketfullaccess_role_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
 | [aws_iam_group_policy_attachment.assume_dns_route53resourcechange_cyber_dhs_gov_role_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
@@ -90,7 +90,7 @@ No modules.
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | assume\_dns\_certificatesbucketfullaccess\_policy\_description | The description to associate with the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account. | `string` | `"The IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account."` | no |
 | assume\_dns\_certificatesbucketfullaccess\_policy\_name | The name to assign the IAM policy that allows assumption of the role that allows full access to the certificates bucket in the DNS account. | `string` | `"DNS-AssumeCertificatesBucketFullAccess"` | no |
 | assume\_dns\_route53resourcechange\_cyber\_dhs\_gov\_policy\_description | The description to associate with the IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account. | `string` | `"The IAM policy that allows assumption of the role that allows sufficient permissions to modify resource records in the cyber.dhs.gov zone in the DNS account."` | no |
